@@ -1,20 +1,27 @@
 import { Api } from "../utils/api";
 
-const createUser = async (data: string) => {
-  try {
-    const response = await Api.post(data)
-      .then((response) => response.data)
-      .catch((err) => err.response.data);
-    console.log(response)
-    //   if(response) localStorage.setItem('@App:user', JSON.stringify)
+const createUser = async (data: any) => {
+  const response = await Api.post("/newUser", data)
+    .then((reponse) => reponse.data)
+    .catch((err) => err.response.data);
+  if(response.user) localStorage.setItem('@App:user', JSON.stringify(response.user))
+  if(response.token) localStorage.setItem('@App:token', JSON.stringify(response.token))
 
-  } catch (err) {
-    console.log(err);
-  }
+  return response;
+};
+const signin = async (data: any) => {
+  const response = await Api.post("/signin", data)
+    .then((response) => response.data)
+    .catch((err) => err.response.data);
+    if(response.user) localStorage.setItem('@App:user', JSON.stringify(response.user))
+    if(response.token) localStorage.setItem('@App:token', JSON.stringify(response.token))
+    return response
 };
 
-const auth = {
-    createUser
-}
 
-export default auth
+const auth = {
+  createUser,
+  signin
+};
+
+export default auth;

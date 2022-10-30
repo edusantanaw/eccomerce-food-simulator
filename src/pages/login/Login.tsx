@@ -1,18 +1,21 @@
-import {useState} from "react";
+import {useState, useRef} from "react";
 import food from "../../assets/login.jpg";
 import Label from "../../components/Label";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import {useDispatch} from 'react-redux'
-import { changeUser } from "../../slice/userSlice";
+import  {sign} from '../../slice/userSlice'
 
 const Login = () => {
-  const [user, setUser] = useState('ola')
   const dispatch = useDispatch()
-
+  const email = useRef()
 
  const  handleLogin = () => {
-    dispatch(changeUser(user))
+    const is = {
+      email:'eduardosantanavidalgmail.com',
+      password: 'eduardo'
+    }
+    dispatch<any>(sign(is))
   }
 
   return (
@@ -31,11 +34,11 @@ const Login = () => {
       <div className="w-1/2 flex justify-center items-center min-h-screen flex-col">
         <h1 className="text-white text-4xl">Login</h1>
         <div className="flex-col flex  mt-2">
-          <Label name={"Email"} />
-          <Input placeholder ='example@mail.com' />
+          {/* <Label name={"Email"} />
+          <Input placeholder ='example@mail.com' ref = {email} />
           <Label name={"Password"} />
-          <Input placeholder=  "***********" />
-          <Button funct = {handleLogin}  />
+          <Input placeholder=  "***********" ref= {''}/>
+          <Button funct = {handleLogin}  /> */}
           <p className="text-white text-xl mt-5 text-center  font-thin">
             Ainda não tem uma conta?<span className="text-violet cursor-pointer"> criar conta.</span>
           </p>
