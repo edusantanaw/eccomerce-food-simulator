@@ -11,6 +11,9 @@ module.exports = {
         'white': "#fff",
         'input': '#181818',
         'sencondary': '#C7C5C5'
+      },
+      boxShadow: {
+        'sha': ' inner  35px 60px -15px rgba(0, 0, 0, 0.3)',
       }
     },
   },
