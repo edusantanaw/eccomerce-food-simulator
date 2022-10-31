@@ -3,13 +3,16 @@ import auth from "../services/authServices";
 
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 
+
 interface initial {
   user: any;
   error: boolean | unknown;
   success: boolean;
   loading: boolean;
 }
-
+type FetchTodosError = {
+  message: string;
+}
 
 const initialState: initial = {
   user: user ? user : null,
@@ -28,7 +31,7 @@ export const register = createAsyncThunk<object, object>(
   }
 );
 
-export const sign = createAsyncThunk<object, object>("auth/sign", async (user, thunkAPI) => {
+export const sign = createAsyncThunk<object, object, { rejectValue: FetchTodosError }>("auth/sign", async (user, thunkAPI) => {
   const response = (await auth.signin(user));
 
   if (response.error) return thunkAPI.rejectWithValue(response.error);

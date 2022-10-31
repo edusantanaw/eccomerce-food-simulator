@@ -1,23 +1,24 @@
-import {useState, useRef} from "react";
+import { useState, useRef } from "react";
 import food from "../../assets/login.jpg";
 import Label from "../../components/Label";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import {useDispatch} from 'react-redux'
-import  {sign} from '../../slice/userSlice'
+import { useDispatch } from "react-redux";
+import { sign } from "../../slice/userSlice";
 
 const Login = () => {
-  const dispatch = useDispatch()
-  const email = useRef()
+  const dispatch = useDispatch();
+  const email = useRef<any>('');
+  const password = useRef<any>("");
 
- const  handleLogin = () => {
-    const is = {
-      email:'eduardosantanavidalgmail.com',
-      password: 'eduardo'
-    }
-    dispatch<any>(sign(is))
-  }
-
+  const handleLogin = () => {
+    const data = {
+      email: email.current.value,
+      password: password.current.value,
+    };
+    dispatch<any>(sign(data));
+  };
+  
   return (
     <div className="flex ">
       <div className="w-1/2 relative h-full  ">
@@ -26,7 +27,7 @@ const Login = () => {
           alt=" food image "
           className=" max-h-screen w-full  object-bottom object-cover "
         />
-        <div className="absolute top-0 w-full h-full bg-opacity-30 bg-pink-600 text-5xl font-bold text-center " >
+        <div className="absolute top-0 w-full h-full bg-opacity-30 bg-pink-600 text-5xl font-bold text-center ">
           <h2 className="text-white mt-32">Food</h2>
           <h2 className="text-violet">delivery</h2>
         </div>
@@ -34,13 +35,24 @@ const Login = () => {
       <div className="w-1/2 flex justify-center items-center min-h-screen flex-col">
         <h1 className="text-white text-4xl">Login</h1>
         <div className="flex-col flex  mt-2">
-          {/* <Label name={"Email"} />
-          <Input placeholder ='example@mail.com' ref = {email} />
+          <Label name={"Email"} />
+          <input
+            type="text"
+            ref={email}
+            placeholder="example@mail.com"
+            className="bg-zinc-900 rounded-md  h-9 outline-none p-5 text-white "
+          />
           <Label name={"Password"} />
-          <Input placeholder=  "***********" ref= {''}/>
-          <Button funct = {handleLogin}  /> */}
+          <input
+            type="text"
+            placeholder="***********"
+            className="bg-zinc-900 rounded-md  h-9 outline-none p-5 text-white "
+            ref={password}
+          />
+          <Button funct={handleLogin} />
           <p className="text-white text-xl mt-5 text-center  font-thin">
-            Ainda não tem uma conta?<span className="text-violet cursor-pointer"> criar conta.</span>
+            Ainda não tem uma conta?
+            <span className="text-violet cursor-pointer"> criar conta.</span>
           </p>
         </div>
       </div>
