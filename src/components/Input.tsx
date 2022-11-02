@@ -1,16 +1,18 @@
 import React from "react";
 
-interface input {
+interface props {
+  value: string;
   placeholder: string;
-  ref: any;
+  ref: React.ForwardedRef<any>;
 }
 
-const Input = ({ placeholder, ref }: input) => {
+const Input = ({ value, placeholder, ref }: props) => {
   return (
     <input
-      placeholder={placeholder}
       ref={ref}
-      className="bg-zinc-900 rounded-md  h-9 outline-none p-5 text-white "
+      className="bg-zinc-900 rounded-md  h-9 outline-none p-5 text-white w-72 "
+      value={value}
+      placeholder={placeholder}
     />
   );
 };

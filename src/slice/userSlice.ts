@@ -1,17 +1,24 @@
-import { createSlice, createAsyncThunk, AnyAction } from "@reduxjs/toolkit";
-import auth from "../services/authServices";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { FormProps } from "react-router-dom";
+import userService from "../services/userServices";
 
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 
-
 interface initial {
   user: any;
-  error: boolean | unknown;
-  success: boolean;
-  loading: boolean;
+  error: Boolean | unknown;
+  success: Boolean;
+  loading: Boolean;
+  logged: Boolean;
 }
 type FetchTodosError = {
   message: string;
+};
+
+interface update {
+  id: string;
+  options: Object;
+  data: any;
 }
 
 const initialState: initial = {
@@ -19,21 +26,39 @@ const initialState: initial = {
   error: false,
   success: false,
   loading: false,
+  logged: false,
 };
 
 export const register = createAsyncThunk<object, object>(
-  "auth/register",
+  "user/register",
   async (user, thunkAPI) => {
-    const response = (await auth.createUser(user)) ;
+    const response = await userService.createUser(user);
     console.log(response);
     if (response.error) return thunkAPI.rejectWithValue(response.error);
     return response;
   }
 );
 
-export const sign = createAsyncThunk<object, object, { rejectValue: FetchTodosError }>("auth/sign", async (user, thunkAPI) => {
-  const response = (await auth.signin(user));
+export const sign = createAsyncThunk<
+  object,
+  object,
+  { rejectValue: FetchTodosError }
+>("user/sign", async (user, thunkAPI) => {
+  const response = await userService.signin(user);
+  if (response.error) return thunkAPI.rejectWithValue(response.error);
+  return response;
+});
 
+export const logout = createAsyncThunk("user/logout", async () => {
+  await userService.logout();
+});
+
+export const update = createAsyncThunk<
+  any,
+  any,
+  { rejectValue: FetchTodosError }
+>("user/update", async (data, thunkAPI) => {
+  const response = await userService.update(data);
   if (response.error) return thunkAPI.rejectWithValue(response.error);
   return response;
 });
@@ -57,11 +82,13 @@ export const slice = createSlice({
         state.error = false;
         state.success = true;
         state.user = action.payload;
+        state.logged = true;
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.user = null;
+        state.logged = false;
       })
       .addCase(sign.pending, (state) => {
         state.loading = true;
@@ -72,12 +99,27 @@ export const slice = createSlice({
         state.error = false;
         state.user = action.payload;
         state.success = true;
+        state.logged = true;
       })
       .addCase(sign.rejected, (state, action) => {
         state.loading = false;
         state.success = false;
         state.user = false;
         state.error = action.payload;
+        state.logged = false;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.loading = false;
+        state.success = true;
+        state.user = null;
+        state.error = false;
+        state.logged = false;
+      })
+      .addCase(update.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.success = true;
+        state.error = false;
       });
   },
 });

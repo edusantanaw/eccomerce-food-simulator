@@ -6,7 +6,7 @@ interface props {
 
 const Label = ({name}: props) => {
   return (
-    <label htmlFor="" className='text-slate-200 mt-3'>{name}</label>
+    <label htmlFor="" className='text-slate-200 '>{name}</label>
   )
 }
 

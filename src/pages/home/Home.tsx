@@ -5,7 +5,7 @@ import Categorys from '../partials/Categorys';
 
 const Home = () => {
   return (
-    <div className='p-28 pt-0'>
+    <div className='p-28 pt-10'>
       <div className='flex justify-between'>
         <Promotion img = {hamburger} name ='Hamburger' desc = "20% off" />
         <Promotion img = {hamburger} name ='Hamburger' desc = "20% off" />
