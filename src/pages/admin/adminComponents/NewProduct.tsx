@@ -18,12 +18,18 @@ const NewProduct = () => {
   };
   const handleCreate = () => {
     const form = new FormData();
-
+    const data = {
+      image: form,
+      name: name.current.value,
+      price: price.current.value,
+      category: category.current.value,
+      description: description.current.value,
+    };
     form.append("name", name.current.value);
-    form.append("price", price.current.value);
-    form.append("category", category.current.value);
-    form.append("description", description.current.value);
-    form.append("image", image);
+    form.append('price', price.current.value)
+    form.append('category', category.current.value)
+    form.append('description', description.current.value)
+    form.append('image', image);
 
     dispatch(register(form));
   };

@@ -12,7 +12,7 @@ const Settings = () => {
   const [actual,setActual] = React.useState<any>(<Account/>)
   
   return (
-    <div className="pt-10 pb-0 p-28 flex">
+    <div className=" p-28 flex">
       <div>
         <h2 className="text-white text-4xl pb-10">Settings</h2>
         <ul className="flex flex-col gap-6">

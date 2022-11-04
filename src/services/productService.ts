@@ -1,9 +1,10 @@
 import { Api } from "../utils/api";
 
 const token = localStorage.getItem('@App:token')
+
 const newProduct = async (data: any) => {
     console.log(data)
-  const response = await Api.post("/product/register",data.data, {
+  const response = await Api.post("/product/register",data, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -14,8 +15,10 @@ const newProduct = async (data: any) => {
   return response;
 };
 
+
 const product = {
-  newProduct,
+  newProduct
 };
+
 
 export default product;

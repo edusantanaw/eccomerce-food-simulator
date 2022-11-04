@@ -10,6 +10,8 @@ import Home from "./pages/home/Home";
 import Header from "./pages/partials/Header";
 import Settings from "./pages/settings/Settings";
 import Menagement from "./pages/admin/Menagement";
+import Deals from "./pages/deals/Deals";
+import Order from "./pages/order/Order";
 
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 function App() {
@@ -32,6 +34,8 @@ function App() {
             path="/admin"
             element={user.admin ? <Menagement /> : <Navigate to="/" />}
           />
+          <Route path ="/deals" element= {auth ? <Deals />: <Navigate to ="/sign" />} />
+          <Route path ="/order" element= {auth ? <Order />: <Navigate to ="/sign" />} />
         </Routes>
       </Router>
     </div>
