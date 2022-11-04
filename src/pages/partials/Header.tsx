@@ -7,13 +7,12 @@ import { Link } from "react-router-dom";
 
 
 const user = JSON.parse(localStorage.getItem("@App:user") || '{}');
-console.log(user)
 
 const Header = () => {
   const [bag, setBag] = useState<Boolean>(false);
   const [perfilToggle, setPerfilToggle] = useState<Boolean>(false);
   const dispatch = useDispatch()
-
+console.log(user)
   const handleLogout = () => {
     dispatch<any>(logout())
   }
@@ -35,9 +34,10 @@ const Header = () => {
         </li>
         <li className="relative flex justify-center" onClick={() => setPerfilToggle(perfilToggle ? false : true)}>
           {perfilToggle && 
-          <ul className="absolute top-10  bg-gray-900 h-24 p-3 rounded-lg">
+          <ul className="absolute top-10  bg-gray-900 flex flex-col gap-3 p-3 rounded-lg">
             <li><Link to={`/user/settings/${user.id}`}>Settings</Link></li>
             <li onClick={()=> handleLogout()}>Logout</li>
+            {user.admin && <li><Link to ="/admin">management</Link></li>}
           </ul>
           }
           {user.photo.length > 0 ? (

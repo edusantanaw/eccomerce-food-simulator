@@ -20,7 +20,6 @@ export const useApi =  (
           .finally(() => {
             setLoading(false);
           });
-     
     
   }, []);
 

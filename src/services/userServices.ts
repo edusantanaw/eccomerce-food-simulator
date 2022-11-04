@@ -1,4 +1,4 @@
-import { FormProps } from "react-router-dom";
+
 import { Api } from "../utils/api";
 
 const createUser = async (data: any) => {
@@ -28,14 +28,15 @@ const logout = () => {
 };
 
 interface update {
-  id: string;
   options: Object;
   data: HTMLFormElement;
+  url: string;
 }
 
 const update = async (data: update) => {
+  console.log(data)
   const response = await Api.patch(
-    `/user/update/${data.id}`,
+    data.url,
     data.data,
     data.options
   )
@@ -45,6 +46,7 @@ const update = async (data: update) => {
     localStorage.setItem("@App:user", JSON.stringify(response.user));
   return response;
 };
+
 
 const auth = {
   createUser,

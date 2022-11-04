@@ -26,12 +26,13 @@ const Account = () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const up = {
+    const params = {
+      url: `/user/update/${user.id}`,
       data: form,
       id: user.id,
       options: options,
     };
-    dispatch<any>(update(up));
+    dispatch<any>(update(params));
   };
 
   const handleLogout = () => {
@@ -45,7 +46,7 @@ const Account = () => {
   return (
     <div className="w-full text-white">
       <h2 className="text-white text-4xl pb-10 ">Account</h2>
-      <div className="border border-neutral-400 py-4 px-8   rounded-md">
+      <div className="border border-neutral-400 py-4 px-8  rounded-md">
         <h3 className="text-2xl font-light">Pesonal informations</h3>
         <div className="flex gap-8 mt-5 items-center">
           <img
