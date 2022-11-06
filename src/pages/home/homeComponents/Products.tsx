@@ -5,14 +5,17 @@ import { useDispatch } from "react-redux";
 
 import { addToCart } from "../../../slice/cartSlice";
 
-const Products = () => {
-  const { data, loading, error } = useApi("/products");
+type params = {
+  url: string;
+};
+const Products = ({ url }: params) => {
+  const { data, loading, error } = useApi(url);
   console.log(data, loading, error);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const addCard = (product: string) => {
-     dispatch(addToCart(product))
-  }
+    dispatch(addToCart(product));
+  };
 
   return (
     <div className="text-white mt-12">
@@ -32,7 +35,10 @@ const Products = () => {
                   </h3>
                   <span className="text-lg ">R$ {products.price}</span>
                 </div>
-                <BsFillCartPlusFill onClick={()=> addCard(products)} className="text-violet p-1  cursor-pointer rounded-sm text-3xl" />
+                <BsFillCartPlusFill
+                  onClick={() => addCard(products)}
+                  className="text-violet p-1  cursor-pointer rounded-sm text-3xl"
+                />
               </div>
             </li>
           ))}

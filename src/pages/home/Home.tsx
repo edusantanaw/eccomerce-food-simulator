@@ -13,7 +13,7 @@ const Home = () => {
         <Promotion img = {hamburger} name ='Hamburger' desc = "20% off" />
       </div>
       <Categorys />
-      <Products />
+      <Products url="/products" />
     </div>
   )
 }

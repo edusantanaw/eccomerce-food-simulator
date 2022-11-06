@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BsBagFill } from "react-icons/bs";
+import { IoBasket } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import imgDefault from "../../assets/perfilDefault.jpg";
 import { logout } from "../../slice/userSlice";
@@ -14,6 +14,10 @@ const Header = () => {
   const handleLogout = () => {
     dispatch<any>(logout());
   };
+
+  const handleBasket = (): void => {
+    setCart(cart ? false : true)
+  }
 
   return (
     <div className="text-white flex fixed justify-between items-center pt-5 pb-2 p-28 w-full bg-black ">
@@ -30,9 +34,9 @@ const Header = () => {
         <li>
           <Link to="/order">My order</Link>
         </li>
-        <li className="relative flex justify-center">
-          <BsBagFill onClick={() => setCart(cart ? false : true)} />
-          {cart && <Cart />}
+        <li className="flex justify-center">
+          <IoBasket className="text-2xl"  onClick={() => handleBasket()} />
+          {cart && <Cart handleBasket = {handleBasket} />}
         </li>
         <li
           className="relative flex justify-center"
@@ -43,12 +47,12 @@ const Header = () => {
               <li>
                 <Link to={`/user/settings/${user.id}`}>Settings</Link>
               </li>
-              <li onClick={() => handleLogout()}>Logout</li>
               {user.admin && (
                 <li>
                   <Link to="/admin">management</Link>
                 </li>
               )}
+              <li onClick={() => handleLogout()}>Logout</li>
             </ul>
           )}
           {user.photo ? (

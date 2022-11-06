@@ -22,15 +22,21 @@ export const register = createAsyncThunk<Object, Object>(
   }
 );
 
+export const update = createAsyncThunk<Object, Object>(
+  "product/update",
+  async (data, ThunkApi) => {
+    const response = await product.updateProduct(data);
+    if (response.error) ThunkApi.rejectWithValue(reportError);
+    return response;
+  }
+);
 
 export const slice = createSlice({
   name: "product",
   initialState,
   reducers: {
     reset: (state) => {
-      (state.loading = false),
-        (state.error = false),
-        (state.success = false);
+      (state.loading = false), (state.error = false), (state.success = false);
     },
   },
   extraReducers: (builder) => {
@@ -48,10 +54,10 @@ export const slice = createSlice({
           (state.error = false),
           (state.success = action.payload);
       })
+      .addCase(update.fulfilled, (state, payload) => {});
   },
 });
 
 export const { reset } = slice.actions;
 
-export const selectProduct = (state: any) => state.products;
 export default slice.reducer;

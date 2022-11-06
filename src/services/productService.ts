@@ -1,13 +1,12 @@
 import { Api } from "../utils/api";
 
-const token = localStorage.getItem('@App:token')
+const token = localStorage.getItem("@App:token");
 
 const newProduct = async (data: any) => {
-    console.log(data)
-  const response = await Api.post("/product/register",data, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+  const response = await Api.post("/product/register", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   })
     .then((response) => response.data)
     .catch((err) => err.response.data);
@@ -15,10 +14,23 @@ const newProduct = async (data: any) => {
   return response;
 };
 
-
-const product = {
-  newProduct
+const updateProduct = async (data: any) => {
+  const {id} = data
+  console.log(id)
+  const response = await Api.patch(`/product/edit/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.data)
+    .catch((err) => err.response.data);
+  console.log(response)
+  return response;
 };
 
+const product = {
+  newProduct,
+  updateProduct
+};
 
 export default product;

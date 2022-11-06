@@ -12,6 +12,7 @@ import Settings from "./pages/settings/Settings";
 import Menagement from "./pages/admin/Menagement";
 import Deals from "./pages/deals/Deals";
 import Order from "./pages/order/Order";
+import Category from "./pages/category/Category";
 
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 function App() {
@@ -36,6 +37,7 @@ function App() {
           />
           <Route path ="/deals" element= {auth ? <Deals />: <Navigate to ="/sign" />} />
           <Route path ="/order" element= {auth ? <Order />: <Navigate to ="/sign" />} />
+          <Route path ="/category/:name" element= {auth ? <Category />: <Navigate to ="/sign" />} />
         </Routes>
       </Router>
     </div>
