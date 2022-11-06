@@ -1,4 +1,3 @@
-import Login from "./pages/login/Login";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,13 +5,18 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
-import Home from "./pages/home/Home";
+import { lazy, Suspense } from "react";
 import Header from "./pages/partials/Header";
-import Settings from "./pages/settings/Settings";
-import Menagement from "./pages/admin/Menagement";
-import Deals from "./pages/deals/Deals";
-import Order from "./pages/order/Order";
-import Category from "./pages/category/Category";
+import Loader from "./components/Loader";
+
+const Home = lazy(() => import("./pages/home/Home"));
+const Login = lazy(() => import("./pages/login/Login"));
+const Settings = lazy(() => import("./pages/settings/Settings"));
+const Deals = lazy(() => import("./pages/deals/Deals"));
+const Order = lazy(() => import("./pages/order/Order"));
+const Category = lazy(() => import("./pages/category/Category"));
+const Menagement = lazy(() => import("./pages/admin/Menagement"));
+const Details = lazy(()=> import('./pages/details/Details'))
 
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 function App() {
@@ -21,24 +25,43 @@ function App() {
     <div className="w-full min-h-screen bg-black">
       <Router>
         {auth && <Header />}
-        <Routes>
-          <Route path="/" element={auth ? <Home /> : <Navigate to="/sign" />} />
-          <Route
-            path="/sign"
-            element={!auth ? <Login /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/user/settings/:id"
-            element={auth ? <Settings /> : <Login />}
-          />
-          <Route
-            path="/admin"
-            element={user.admin ? <Menagement /> : <Navigate to="/" />}
-          />
-          <Route path ="/deals" element= {auth ? <Deals />: <Navigate to ="/sign" />} />
-          <Route path ="/order" element= {auth ? <Order />: <Navigate to ="/sign" />} />
-          <Route path ="/category/:name" element= {auth ? <Category />: <Navigate to ="/sign" />} />
-        </Routes>
+        <Suspense fallback ={<Loader/>}>
+          <Routes>
+            <Route
+              path="/"
+              element={auth ? <Home /> : <Navigate to="/sign" />}
+            />
+            <Route
+              path="/sign"
+              element={!auth ? <Login /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/user/settings/:id"
+              element={auth ? <Settings /> : <Login />}
+            />
+            <Route
+              path="/admin"
+              element={user.admin ? <Menagement /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/deals"
+              element={auth ? <Deals /> : <Navigate to="/sign" />}
+            />
+            <Route
+              path="/order/:id"
+              element={auth ? <Order /> : <Navigate to="/sign" />}
+            />
+            <Route
+              path="/category/:name"
+              element={auth ? <Category /> : <Navigate to="/sign" />}
+            />
+            <Route
+              path="/product/:id"
+              element={auth ? <Details /> : <Navigate to="/sign" />}
+            />
+            
+          </Routes>
+        </Suspense>
       </Router>
     </div>
   );

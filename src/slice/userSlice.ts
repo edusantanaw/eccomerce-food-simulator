@@ -59,7 +59,6 @@ export const update = createAsyncThunk<
   { rejectValue: FetchTodosError }
 >("user/update", async (data, thunkAPI) => {
   const response = await userService.update(data);
-  console.log(response);
   if (response.error) return thunkAPI.rejectWithValue(response.error);
   return response;
 });

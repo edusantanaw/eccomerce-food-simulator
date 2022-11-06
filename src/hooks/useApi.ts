@@ -6,7 +6,7 @@ const token = localStorage.getItem('@App:token')
 export const useApi =  (
   url: string
 ) => {
-  const [data, setData] = useState<[]>();
+  const [data, setData] = useState<object[]>();
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<Boolean>(true);
 

@@ -20,7 +20,7 @@ const Header = () => {
   }
 
   return (
-    <div className="text-white flex fixed justify-between items-center pt-5 pb-2 p-28 w-full bg-black ">
+    <div className="text-white flex fixed justify-between items-center pt-5 pb-2 p-28 w-full bg-black z-10 ">
       <Link to="/">
         <div className="text-3xl font-semibold">
           <h1>Food</h1>
@@ -32,7 +32,7 @@ const Header = () => {
           <Link to="/deals">Deals</Link>
         </li>
         <li>
-          <Link to="/order">My order</Link>
+          <Link to={`/order/${user.id}`}>My order</Link>
         </li>
         <li className="flex justify-center">
           <IoBasket className="text-2xl"  onClick={() => handleBasket()} />

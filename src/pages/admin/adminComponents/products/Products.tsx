@@ -3,6 +3,7 @@ import { useApi } from "../../../../hooks/useApi";
 import NewProduct from "./NewProduct";
 import { FaEdit } from "react-icons/fa";
 import EditProduct from "./EditProduct";
+import Loader from "../../../../components/Loader";
 
 interface product {
   name: string;
@@ -19,7 +20,7 @@ const Products = () => {
   const [newProduct, setNewProduct] = React.useState<boolean>(false);
   const [edit, setEdit] = React.useState<boolean>(false);
   const { data, error, loading } = useApi("/products");
-const  [id, setId] = React.useState<string>('')
+  const [id, setId] = React.useState<string>("");
   const handleProduct = () => {
     setNewProduct(newProduct ? false : true);
   };
@@ -27,6 +28,7 @@ const  [id, setId] = React.useState<string>('')
   const handleEdit = () => {
     edit ? setEdit(false) : setEdit(true);
   };
+  if(loading) return <Loader />
 
   return (
     <div className="mt-10">
@@ -42,7 +44,7 @@ const  [id, setId] = React.useState<string>('')
         </button>
       </div>
       <ul className="flex flex-col gap-2">
-        {data &&
+        {data ?
           data.map((prod: product, i: number) => (
             <li
               className="list-none border border-violet rounded-md flex  relative p-2"
@@ -54,11 +56,14 @@ const  [id, setId] = React.useState<string>('')
                 <span>id: {prod._id}</span>
               </div>
               <FaEdit
-                onClick={() => handleEdit()}
+                onClick={() =>{
+                     handleEdit()
+                     setId(prod._id)
+                }}
                 className="absolute right-6 top-9 text-2xl text-blue-700"
               />
             </li>
-          ))}
+          )):<span className="text-white">products not find</span>}
       </ul>
     </div>
   );

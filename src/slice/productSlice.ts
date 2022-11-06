@@ -17,6 +17,7 @@ export const register = createAsyncThunk<Object, Object>(
   "product/register",
   async (data, ThunkApi) => {
     const response = await product.newProduct(data);
+   console.log(response)
     if (response.error) ThunkApi.rejectWithValue(reportError);
     return response;
   }

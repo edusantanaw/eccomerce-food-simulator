@@ -7,7 +7,7 @@ interface prodInfo {
   name: string;
   image: [];
   desc: string;
-  quantity: 0;
+  quantity: number;
 }
 
 interface product {
@@ -31,7 +31,7 @@ export const cartSlice = createSlice({
       });
       verify.length > 0
         ? state.products.map((prod) => {
-            if(prod.quantity === undefined) prod.quantity = 0 //quantity was undefined
+            if(prod.quantity === undefined) prod.quantity = 1 //quantity was undefined
             prod._id === payload.payload._id ? (prod.quantity += 1) : prod;
             console.log(prod.quantity);
             return prod;

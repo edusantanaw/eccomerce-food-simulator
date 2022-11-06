@@ -1,3 +1,4 @@
+import Orders from "./adminComponents/products/Orders";
 import Products from "./adminComponents/products/Products";
 
 const Menagement = () => {
@@ -6,6 +7,7 @@ const Menagement = () => {
       <div>
         <h2 className="text-4xl">Menagement</h2>
       </div>
+      <Orders />
       <Products />
     </div>
   );

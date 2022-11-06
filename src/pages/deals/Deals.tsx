@@ -1,18 +1,25 @@
-import React from 'react'
-import { useApi } from '../../hooks/useApi'
+import React from "react";
+import Products from "../home/homeComponents/Products";
 
-const Deals = () => {
-    const {data, loading, error} = useApi('/products/deals')
-  return (
-    <div className='p-28 text-white'>
-        <h2 className='text-4xl'>deals</h2>
-        {data ? data.map((products)=>(
-            <li>
-                products.name
-            </li>
-        )): <span>deals not find</span>}
-    </div>
-  )
+interface product {
+  name: string;
+  _id: string;
+  category: string;
+  image: [
+    {
+      filename: string;
+    }
+  ];
 }
 
-export default Deals
+
+const Deals = () => {
+  return (
+    <div className="p-28 text-white">
+      <h2 className="text-4xl">Deals</h2>
+     <Products url="/products/deals" />
+    </div>
+  );
+};
+
+export default Deals;

@@ -15,8 +15,7 @@ const newProduct = async (data: any) => {
 };
 
 const updateProduct = async (data: any) => {
-  const {id} = data
-  console.log(id)
+  const id = data.get('id')
   const response = await Api.patch(`/product/edit/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -31,6 +31,7 @@ const NewProduct = ({ handleProduct }: func) => {
     form.append("image", image);
 
     dispatch(register(form));
+    handleProduct()
   };
 
   return (
