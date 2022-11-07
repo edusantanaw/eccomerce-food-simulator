@@ -16,7 +16,6 @@ const Deals = lazy(() => import("./pages/deals/Deals"));
 const Order = lazy(() => import("./pages/order/Order"));
 const Category = lazy(() => import("./pages/category/Category"));
 const Menagement = lazy(() => import("./pages/admin/Menagement"));
-const Details = lazy(()=> import('./pages/details/Details'))
 
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 function App() {
@@ -55,11 +54,6 @@ function App() {
               path="/category/:name"
               element={auth ? <Category /> : <Navigate to="/sign" />}
             />
-            <Route
-              path="/product/:id"
-              element={auth ? <Details /> : <Navigate to="/sign" />}
-            />
-            
           </Routes>
         </Suspense>
       </Router>

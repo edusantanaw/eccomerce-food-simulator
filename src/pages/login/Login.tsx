@@ -21,20 +21,9 @@ const Login = () => {
   
   return (
     <div className="flex ">
-      <div className="w-1/2 relative h-full  ">
-        <img
-          src={food}
-          alt=" food image "
-          className=" max-h-screen w-full  object-bottom object-cover "
-        />
-        <div className="absolute top-0 w-full h-full bg-opacity-30 bg-pink-600 text-5xl font-bold text-center ">
-          <h2 className="text-white mt-32">Food</h2>
-          <h2 className="text-violet">delivery</h2>
-        </div>
-      </div>
-      <div className="w-1/2 flex justify-center items-center min-h-screen flex-col">
+      <div className="w-full flex justify-center items-center min-h-screen flex-col">
         <h1 className="text-white text-4xl">Login</h1>
-        <div className="flex-col flex  mt-2">
+        <div className="flex-col flex gap-2  mt-2">
           <Label name={"Email"} />
           <input
             type="text"

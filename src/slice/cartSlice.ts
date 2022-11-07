@@ -38,15 +38,18 @@ export const cartSlice = createSlice({
           })
         : state.products.push(payload.payload);
     },
-    removeToCard: (state, payload) => {
+    removeToCart: (state, payload) => {
       state.products = state.products.filter(
         (prod) => prod._id !== payload.payload
       );
     },
+    clearCart: (state) => {
+      state.products = state.products = []
+    }
   },
 });
 
-export const { addToCart, removeToCard } = cartSlice.actions;
+export const { addToCart, removeToCart, clearCart } = cartSlice.actions;
 
 export const selectCart = (state: any) => state.product;
 export default cartSlice.reducer;

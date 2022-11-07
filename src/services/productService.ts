@@ -15,7 +15,7 @@ const newProduct = async (data: any) => {
 };
 
 const updateProduct = async (data: any) => {
-  const id = data.get('id')
+  const id = data.get("id");
   const response = await Api.patch(`/product/edit/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -23,13 +23,27 @@ const updateProduct = async (data: any) => {
   })
     .then((response) => response.data)
     .catch((err) => err.response.data);
-  console.log(response)
+  console.log(response);
+  return response;
+};
+
+const order = async (data: any) => {
+  const response = await Api.post("/order/new", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  console.log(response);
   return response;
 };
 
 const product = {
   newProduct,
-  updateProduct
+  updateProduct,
+  order,
 };
 
 export default product;

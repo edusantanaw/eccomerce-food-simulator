@@ -45,7 +45,7 @@ const Products = () => {
       </div>
       <ul className="flex flex-col gap-2">
         {data ?
-          data.map((prod: product, i: number) => (
+          data.map((prod: any , i: number) => (
             <li
               className="list-none border border-violet rounded-md flex  relative p-2"
               key={i}

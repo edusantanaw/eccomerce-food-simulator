@@ -63,7 +63,7 @@ export const update = createAsyncThunk<
   return response;
 });
 
-export const slice = createSlice({
+export const slice: any = createSlice({
   name: "user",
   initialState,
   reducers: {
