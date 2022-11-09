@@ -38,7 +38,7 @@ const EditProduct = ({ handleEdit, id }: props) => {
 
   return (
     <div className="fixed flex items-center justify-center top-0 left-0 z-10 bg-black w-full h-full bg-opacity-40">
-      <div className="flex flex-col gap-2 w-2/6 rounded-md p-6 h-5/6 bg-zinc-800">
+      <div className="flex flex-col gap-2 w-3/4 md:w-1/2 lg:w-2/6 rounded-md p-6  bg-zinc-800">
         <Label name="Name" />
         <input
           className="bg-zinc-900 rounded-md  h-9 outline-none p-5 text-white  "

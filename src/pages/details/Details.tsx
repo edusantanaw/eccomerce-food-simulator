@@ -20,11 +20,11 @@ const Details = ({ id, showDetails, addCard }: id) => {
       <div onClick={() => showDetails()} className="absolute top-0 left-0 w-full h-screen"></div>
       {data &&
         data.map((prod: any) => (
-          <div className="flex z-10 rounded-md shadow-sm shadow-slate-300 flex-col w-1/3 p-6 bg-black mt-10 ">
+          <div className="flex z-10 rounded-md shadow-sm shadow-slate-300 flex-col w-3/4 md:w-1/2 lg:w-1/3 p-6 bg-black mt-10 ">
             <img
               alt="product image"
               className="rounded-md object-cover w-full h-80 self-center"
-              src={`http://localhost:5000/products/${prod.image[0].filename}`}
+              src={`http://localhost:5000/products/${prod.image[0]?.filename}`}
             />
             <div className="flex flex-col pt-3">
               <h2 className="text-4xl text-violet">{prod.name}</h2>

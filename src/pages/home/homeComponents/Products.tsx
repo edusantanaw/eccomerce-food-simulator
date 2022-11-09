@@ -14,14 +14,12 @@ type params = {
 const Products = ({ url }: params) => {
   const { data, loading, error } = useApi(url);
   const [details, setShowDetails] = React.useState<boolean>(false);
-  const [detailsId, setDetailsId] = React.useState<string>("");
+  const [detailsId, setDetailsId] = React.useState<string>('');
   const dispatch = useDispatch();
-
-  if (loading) return <Loader />;
 
   const handleShowDetails = (id: string) => {
     setDetailsId(id);
-    setShowDetails(details ? false : true);
+    setShowDetails(true);
   };
   const addCard = (product: string) => {
     dispatch(addToCart(product));
@@ -31,23 +29,22 @@ const Products = ({ url }: params) => {
     setShowDetails(false);
   };
 
+  if (loading) return <Loader />;
+
   return (
     <div className="text-white mt-12">
-      {details && (
-        <Details id={detailsId} addCard={addCard} showDetails={close} />
-      )}
-      <ul className="flex gap-x-8 flex-wrap ">
+      <ul className="flex justify-center lg:justify-start gap-x-8 flex-wrap ">
         {data ? (
           data.map((products: any, i) => (
             <li
-              className="w-64 mr-px h-64 mb-12 bg-zinc-900 rounded-md"
+              className=" w-96 h-96 sm:w-64 mr-px sm:h-64 mb-12 bg-zinc-900 rounded-md"
               key={i}
             >
               <img
                 onClick={() => handleShowDetails(products._id)}
                 loading="lazy"
                 className="w-full object-cover h-4/6 cursor-pointer rounded-t-md"
-                src={`http://localhost:5000/products/${products.image[0].filename}`}
+                src={`http://localhost:5000/products/${products.image[0]?.filename}`}
                 alt="product image"
               />
               <div className="flex p-2 items-center justify-between">
@@ -71,6 +68,9 @@ const Products = ({ url }: params) => {
           <span>products not find</span>
         )}
       </ul>
+      {details && (
+        <Details id={detailsId} addCard={addCard} showDetails={close} />
+      )}
     </div>
   );
 };

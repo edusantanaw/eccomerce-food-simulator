@@ -4,7 +4,6 @@ import { VscAccount } from "react-icons/vsc";
 import { MdPayment, MdSecurity } from "react-icons/md";
 import Account from "./settingsComponents/Account";
 import Address from "./settingsComponents/Address";
-import Payment from "./settingsComponents/Payment";
 import Security from "./settingsComponents/Security";
 
 const Settings = () => {
@@ -31,17 +30,6 @@ const Settings = () => {
               <h3 className="text-white font-medium text-2xl">Address</h3>
               <span className="text-xl text-slate-200 font-thin">
                 address informations
-              </span>
-            </div>
-          </li>
-          <li  onClick={()=> setActual(<Payment/>)} className="flex items-center border w-72 py-1 px-2  rounded-md border-neutral-400 cursor-pointer">
-            <MdPayment className="text-5xl text-white bg-emerald-800 p-2 rounded-md mr-3" />
-            <div>
-              <h3 className="text-white font-medium text-2xl">
-                Payment Methods
-              </h3>
-              <span className="text-xl text-slate-200 font-thin">
-                payment informations
               </span>
             </div>
           </li>

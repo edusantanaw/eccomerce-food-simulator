@@ -40,10 +40,25 @@ const order = async (data: any) => {
   return response;
 };
 
+const updateStatus = async (data: any) => {
+  const { id } = data;
+  const response = await Api.patch(`/order/status/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => error.response.data);
+
+  console.log(response);
+  return response;
+};
+
 const product = {
   newProduct,
   updateProduct,
   order,
+  updateStatus,
 };
 
 export default product;

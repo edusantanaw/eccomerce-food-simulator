@@ -6,8 +6,8 @@ import Products from './homeComponents/Products';
 
 const Home = () => {
   return (
-    <div className='p-28 '>
-      <div className='flex justify-between'>
+    <div className='px-10 py-28 lg:p-28 '>
+      <div className='flex gap-y-5 flex-col md:flex-row flex-wrap justify-between'>
         <Promotion img = {hamburger} name ='Hamburger' desc = "20% off" />
         <Promotion img = {hamburger} name ='Hamburger' desc = "20% off" />
         <Promotion img = {hamburger} name ='Hamburger' desc = "20% off" />

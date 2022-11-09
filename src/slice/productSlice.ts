@@ -6,12 +6,14 @@ interface initialState {
   error: any;
   success: any;
   loading: boolean;
+  msg: any;
 }
 
 const initialState: initialState = {
   error: false,
   success: false,
   loading: false,
+  msg: "",
 };
 
 export const register = createAsyncThunk<Object, Object>(
@@ -42,12 +44,24 @@ export const order = createAsyncThunk<Object, Object>(
   }
 );
 
+export const updateStatus = createAsyncThunk<Object, Object>(
+  "product/updateStatus",
+  async (data, ThunkApi) => {
+    const response = await product.updateStatus(data);
+    if (response.error) ThunkApi.rejectWithValue(reportError);
+    return response;
+  }
+);
+
 export const slice = createSlice({
   name: "product",
   initialState,
   reducers: {
     reset: (state) => {
-      (state.loading = false), (state.error = false), (state.success = false);
+      (state.loading = false),
+        (state.error = false),
+        (state.success = false),
+        (state.msg = "");
     },
   },
   extraReducers: (builder) => {
@@ -58,12 +72,14 @@ export const slice = createSlice({
       .addCase(register.rejected, (state, action) => {
         (state.loading = false),
           (state.success = false),
-          (state.error = action.payload);
+          (state.error = true),
+          (state.msg = action.payload);
       })
       .addCase(register.fulfilled, (state, action) => {
         (state.loading = false),
           (state.error = false),
-          (state.success = action.payload);
+          (state.success = true),
+          (state.msg = action.payload);
       })
       .addCase(update.pending, (state) => {
         (state.loading = true), (state.error = false), (state.success = false);
@@ -71,12 +87,14 @@ export const slice = createSlice({
       .addCase(update.fulfilled, (state, action) => {
         (state.error = false),
           (state.loading = false),
-          (state.success = action.payload);
+          (state.success = true),
+          (state.msg = action.payload);
       })
       .addCase(update.rejected, (state, action) => {
         (state.loading = false),
           (state.success = false),
-          (state.error = action.payload);
+          (state.error = true),
+          (state.msg = action.payload);
       })
       .addCase(order.pending, (state) => {
         (state.loading = true), (state.success = false), (state.error = false);
@@ -84,16 +102,33 @@ export const slice = createSlice({
       .addCase(order.fulfilled, (state, action) => {
         (state.loading = false),
           (state.error = false),
-          (state.success = action);
+          (state.success = true),
+          (state.msg = action.payload);
       })
       .addCase(order.rejected, (state, action) => {
         (state.loading = false),
-          (state.error = action.payload),
-          (state.success = false);
+          (state.error = true),
+          (state.success = false),
+          (state.msg = action.payload);
+      })
+      .addCase(updateStatus.pending, (state) => {
+        (state.loading = true), (state.success = false), (state.error = false);
+      })
+      .addCase(updateStatus.fulfilled, (state, action) => {
+        (state.loading = false),
+          (state.error = false),
+          (state.success = true),
+          (state.msg = action.payload);
+      })
+      .addCase(updateStatus.rejected, (state, action) => {
+        (state.loading = false),
+          (state.error = true),
+          (state.success = false),
+          (state.msg = action.payload);
       });
   },
 });
 
 export const { reset } = slice.actions;
-
+export const selectMsg = (state: any) => state.msg 
 export default slice.reducer;
