@@ -1,10 +1,10 @@
-import { useState, useRef } from "react";
-import food from "../../assets/login.jpg";
+import { useRef } from "react";
 import Label from "../../components/Label";
-import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useDispatch } from "react-redux";
 import { sign } from "../../slice/userSlice";
+import { Link } from "react-router-dom";
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Login = () => {
   };
   
   return (
-    <div className="flex ">
+    <div>
       <div className="w-full flex justify-center items-center min-h-screen flex-col">
         <h1 className="text-white text-4xl">Login</h1>
         <div className="flex-col flex gap-2  mt-2">
@@ -41,7 +41,7 @@ const Login = () => {
           <Button funct={handleLogin} />
           <p className="text-white text-xl mt-5 text-center  font-thin">
             Ainda não tem uma conta?
-            <span className="text-violet cursor-pointer"> criar conta.</span>
+            <Link to="/signout"><span className="text-violet cursor-pointer"> criar conta.</span></Link>
           </p>
         </div>
       </div>

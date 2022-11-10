@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import Label from "../../../../components/Label";
@@ -10,13 +10,13 @@ interface props {
 }
 
 const EditProduct = ({ handleEdit, id }: props) => {
-  const name = React.useRef<any>();
-  const price = React.useRef<any>();
-  const category = React.useRef<any>();
-  const description = React.useRef<any>();
-  const off = React.useRef<any>();
-  const [image, setImage] = React.useState<any>();
-  const [showCategory, setShowCategory] = React.useState(false);
+  const name = useRef<HTMLInputElement>(null);
+  const price = useRef<HTMLInputElement>(null);
+  const [category, setCategory] = useState<string>("hamburger");
+  const description = useRef<HTMLInputElement>(null);
+  const off = useRef<HTMLInputElement>(null);
+  const [image, setImage] = useState<any>();
+  const [showCategory, setShowCategory] = useState(false);
   const dispatch = useDispatch<any>();
 
   const handleImage = (e: any) => {
@@ -25,16 +25,16 @@ const EditProduct = ({ handleEdit, id }: props) => {
   };
   const handleCreate = () => {
     const form = new FormData();
-    form.append("name", name.current.value);
-    form.append("price", price.current.value);
-    form.append("category", category.current.value);
-    form.append("description", description.current.value);
+    if (name.current !== null) form.append("name", name.current.value);
+    if (price.current !== null) form.append("price", price.current.value);
+    form.append("category", category);
+    if (description.current !== null)
+      form.append("description", description.current.value);
     form.append("image", image);
-    form.append("off", off.current.value);
-    form.append("id", id)
-    dispatch(update( form));
+    if (off.current !== null) form.append("off", off.current.value);
+    form.append("id", id);
+    dispatch(update(form));
   };
-  // name, category, price, description, off, image, available
 
   return (
     <div className="fixed flex items-center justify-center top-0 left-0 z-10 bg-black w-full h-full bg-opacity-40">
@@ -49,9 +49,8 @@ const EditProduct = ({ handleEdit, id }: props) => {
         <div className="relative">
           <input
             className="bg-zinc-900 rounded-md w-full cursor-pointer  h-9 outline-none p-5 text-white  "
-            ref={category}
+            value={category}
             placeholder="example"
-            defaultValue="hamburger"
             onClick={() => setShowCategory(showCategory ? false : true)}
             readOnly
           />
@@ -60,31 +59,31 @@ const EditProduct = ({ handleEdit, id }: props) => {
             <ul className="absolute bg-zinc-900 w-full mt-2 rounded-md p-2">
               <li
                 className="p-1 cursor-pointer"
-                onClick={() => (category.current.value = "hamburger")}
+                onClick={() => (setCategory("hamburger"))}
               >
                 Hamburger
               </li>
               <li
                 className="p-1 cursor-pointer"
-                onClick={() => (category.current.value = "pizza")}
+                onClick={() => (setCategory("pizza"))}
               >
                 Pizza
               </li>
               <li
                 className="p-1 cursor-pointer"
-                onClick={() => (category.current.value = "cake")}
+                onClick={() => (setCategory("cake"))}
               >
                 cake
               </li>
               <li
                 className="p-1 cursor-pointer"
-                onClick={() => (category.current.value = "icecream")}
+                onClick={() => (setCategory("icecream"))}
               >
                 Ice cream
               </li>
               <li
                 className="p-1 cursor-pointer"
-                onClick={() => (category.current.value = "tacos")}
+                onClick={() => (setCategory("tacos"))}
               >
                 Tacos
               </li>

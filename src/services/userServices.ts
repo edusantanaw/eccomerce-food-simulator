@@ -5,6 +5,7 @@ const createUser = async (data: any) => {
   const response = await Api.post("/newUser", data)
     .then((reponse) => reponse.data)
     .catch((err) => err.response.data);
+    console.log(response)
   if (response.user)
     localStorage.setItem("@App:user", JSON.stringify(response.user));
   if (response.token) localStorage.setItem("@App:token", response.token);

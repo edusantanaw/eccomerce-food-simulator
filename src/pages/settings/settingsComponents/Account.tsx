@@ -2,7 +2,7 @@ import React from "react";
 import Label from "../../../components/Label";
 import { useDispatch } from "react-redux";
 import { logout, update } from "../../../slice/userSlice";
-
+import imgDefault from '../../../assets/perfilDefault.jpg'
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 const token = localStorage.getItem("@App:token");
 
@@ -51,9 +51,10 @@ const Account = () => {
         <div className="flex gap-8 mt-5 items-center">
           <img
             className=" h-14 w-14  object-cover rounded-md"
-            src={`http://localhost:5000/${
+            src={user.photo > 0 ? `http://localhost:5000/${
+
               user.photo.split("\\")[1] + "/" + user.photo.split("\\")[2]
-            }`}
+              }`: imgDefault}
             alt="user perfil photo"
           />
           <div>

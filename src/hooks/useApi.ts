@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 
 const token = localStorage.getItem('@App:token')
 export const useApi =  (
-  url: string
+  url: string,
+  dependece?: any
 ) => {
-  const [data, setData] = useState<object[]>();
+  const [data, setData] = useState<object[]>([]);
   const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<Boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const options = {
     headers: {
@@ -28,7 +29,7 @@ export const useApi =  (
             setLoading(false);
           });
     
-  }, []);
+  }, [dependece]);
 
   return { data, loading, error };
 };

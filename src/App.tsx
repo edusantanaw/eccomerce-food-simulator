@@ -8,6 +8,8 @@ import { useAuth } from "./hooks/useAuth";
 import { lazy, Suspense } from "react";
 import Header from "./pages/partials/Header";
 import Loader from "./components/Loader";
+import Signout from "./pages/login/Signout";
+import { sign } from "./slice/userSlice";
 
 const Home = lazy(() => import("./pages/home/Home"));
 const Login = lazy(() => import("./pages/login/Login"));
@@ -24,7 +26,7 @@ function App() {
     <div className="w-full min-h-screen bg-black">
       <Router>
         {auth && <Header />}
-        <Suspense fallback ={<Loader/>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route
               path="/"
@@ -53,6 +55,10 @@ function App() {
             <Route
               path="/category/:name"
               element={auth ? <Category /> : <Navigate to="/sign" />}
+            />
+            <Route
+              path="/signout"
+              element={!auth ? <Signout /> : <Navigate to="/" />}
             />
           </Routes>
         </Suspense>

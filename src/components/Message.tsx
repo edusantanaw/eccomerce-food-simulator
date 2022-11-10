@@ -6,6 +6,6 @@ interface msg {
 
 export const Message = ({msg}: msg) => {
   return (
-    <div className='absolute top-3 right-4 text-white bg-violet w-72 h-20'><span>{msg}</span></div>
+    <div className=' absolute top-20 right-28  text-white bg-violet px-10 shadow-md shadow-slate-800 rounded-md  py-5 z-30'><span>{msg}</span></div>
   )
 }

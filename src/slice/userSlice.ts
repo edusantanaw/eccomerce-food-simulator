@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { FormProps } from "react-router-dom";
 import userService from "../services/userServices";
 
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");

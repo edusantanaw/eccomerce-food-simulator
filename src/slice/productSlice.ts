@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import { Action } from "@remix-run/router";
+import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import product from "../services/productService";
 
 interface initialState {
@@ -20,7 +19,6 @@ export const register = createAsyncThunk<Object, Object>(
   "product/register",
   async (data, ThunkApi) => {
     const response = await product.newProduct(data);
-    console.log(response);
     if (response.error) ThunkApi.rejectWithValue(reportError);
     return response;
   }

@@ -59,7 +59,7 @@ const Cart = ({ handleBasket }: func) => {
   };
 
   return (
-    <div className=" absolute top-0 left-0 w-full h-screen z-10">
+    <div className=" absolute top-0 left-0 w-full h-screen z-30">
       <div onClick={() => handleBasket()} className="w-full h-screen "></div>
       <div className="w-3/4 md:w-1/2 lg:w-1/3   h-screen absolute bg-black bg-opacity-90 top-0 right-0 z-10 shadow-sm shadow-white text-white cursor-default">
         <div className="w-full mb-2 p-3  rounded-b-md  flex items-center justify-between bg-violet  ">
@@ -80,7 +80,7 @@ const Cart = ({ handleBasket }: func) => {
                 <div className="flex gap-4 items-center">
                   <img
                     className="h-10 w-10 object-cover rounded-md"
-                    src={`http://localhost:5000/products/${prod.image[0].filename}`}
+                    src={`http://localhost:5000/products/${prod.image[0]?.filename}`}
                     alt="product image"
                   />
                   <span>{prod.name}</span>
