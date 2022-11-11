@@ -15,7 +15,7 @@ const Settings = () => {
       <div>
         <h2 className="text-white text-4xl pb-10">Settings</h2>
         <ul className="flex flex-col gap-6">
-          <li  onClick={()=> setActual(<Account/>)} className="flex items-center border w-72 py-1 px-2  rounded-md border-neutral-400 cursor-pointer">
+          <li  onClick={()=> setActual(<Account/>)} className="flex items-center border w-72 py-1 px-2  rounded-md border-violet cursor-pointer">
             <VscAccount className="text-5xl text-white bg-sky-600 p-2 rounded-md mr-3" />
             <div>
               <h3 className="text-white font-medium text-2xl">Account</h3>
@@ -24,7 +24,7 @@ const Settings = () => {
               </span>
             </div>
           </li>
-          <li  onClick={()=> setActual(<Address/>)} className="flex items-center border w-72 py-1 px-2  rounded-md border-neutral-400 cursor-pointer ">
+          <li  onClick={()=> setActual(<Address/>)} className="flex items-center border w-72 py-1 px-2  rounded-md border-violet cursor-pointer ">
             <FaAddressBook className="text-5xl text-white bg-teal-600 p-2 rounded-md mr-3" />
             <div>
               <h3 className="text-white font-medium text-2xl">Address</h3>
@@ -33,7 +33,7 @@ const Settings = () => {
               </span>
             </div>
           </li>
-          <li  onClick={()=> setActual(<Security/>)} className="flex items-center border w-72 py-1 px-2  rounded-md border-neutral-400 cursor-pointer">
+          <li  onClick={()=> setActual(<Security/>)} className="flex items-center border w-72 py-1 px-2  rounded-md border-violet cursor-pointer">
             <MdSecurity className="text-5xl text-white bg-slate-700 p-2 rounded-md mr-3" />
             <div>
               <h3 className="text-white font-medium text-2xl">Security</h3>

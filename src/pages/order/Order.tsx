@@ -6,7 +6,7 @@ import { useApi } from "../../hooks/useApi";
 const Order = () => {
   const params = useParams();
   const { data, loading, error } = useApi(`/order/${params.id}`);
-  console.log(data, error);
+
   if (loading) return <Loader />;
   return (
     <div className="p-28 text-white">

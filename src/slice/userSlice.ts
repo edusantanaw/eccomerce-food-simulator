@@ -34,7 +34,6 @@ export const signout = createAsyncThunk<
   { rejectValue: FetchTodosError }
 >("user/signout", async (user, thunkAPI) => {
   const response = await userService.createUser(user);
-  console.log(response);
   if (response.error) return thunkAPI.rejectWithValue(response.error);
   return response;
 });

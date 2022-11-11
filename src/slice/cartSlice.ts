@@ -33,7 +33,6 @@ export const cartSlice = createSlice({
         ? state.products.map((prod) => {
             if(prod.quantity === undefined) prod.quantity = 1 //quantity was undefined
             prod._id === payload.payload._id ? (prod.quantity += 1) : prod;
-            console.log(prod.quantity);
             return prod;
           })
         : state.products.push(payload.payload);

@@ -4,7 +4,6 @@ import { FaTrashAlt } from "react-icons/fa";
 import { removeToCart, clearCart } from "../../../slice/cartSlice";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoBasket } from "react-icons/io5";
-import { Link } from "react-router-dom";
 import { order } from "../../../slice/productSlice";
 
 interface cart {
@@ -40,8 +39,17 @@ const Cart = ({ handleBasket }: func) => {
   };
 
   React.useEffect(() => {
-    const products = prod.map((product: any) => (product = {prod: product._id, quantity: product.quantity}));
+    const products = prod.map(
+      (product: any) =>
+        (product = { prod: product._id, quantity: product.quantity })
+    );
     const total = prod.reduce((m: number, product: any) => {
+      if (product.off > 0)
+        return (
+          m +
+          (product.price - product.price * product.off) *
+            (product.quantity ? product.quantity : 1)
+        );
       if (product.quantity === undefined) return (m += product.price);
       return (m += product.price * product.quantity);
     }, 0);

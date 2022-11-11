@@ -1,6 +1,4 @@
-import React from "react";
 import { IoBasket } from "react-icons/io5";
-import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { useApi } from "../../hooks/useApi";
 
@@ -12,15 +10,15 @@ interface id {
 
 const Details = ({ id, showDetails, addCard }: id) => {
   const { data, error, loading } = useApi(`/products/${id}`);
-  console.log(data);
+
   if (loading) return <Loader />;
 
   return (
     <div className="fixed left-0 flex justify-center items-center top-0 z-20 bg-black bg-opacity-50 w-full h-screen  text-white">
       <div onClick={() => showDetails()} className="absolute top-0 left-0 w-full h-screen"></div>
       {data &&
-        data.map((prod: any) => (
-          <div className="flex z-10 rounded-md shadow-sm shadow-slate-300 flex-col w-3/4 md:w-1/2 lg:w-1/3 p-6 bg-black mt-10 ">
+        data.map((prod: any, i:number) => (
+          <div key={i} className="flex z-10 rounded-md shadow-sm shadow-slate-300 flex-col w-3/4 md:w-1/2 lg:w-1/3 p-6 bg-black mt-10 ">
             <img
               alt="product image"
               className="rounded-md object-cover w-full h-80 self-center"

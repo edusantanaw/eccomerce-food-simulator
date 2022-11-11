@@ -14,7 +14,7 @@ type params = {
 const Products = ({ url }: params) => {
   const { data, loading, error } = useApi(url);
   const [details, setShowDetails] = React.useState<boolean>(false);
-  const [detailsId, setDetailsId] = React.useState<string>('');
+  const [detailsId, setDetailsId] = React.useState<string>('gdxzc');
   const dispatch = useDispatch();
 
   const handleShowDetails = (id: string) => {
@@ -55,7 +55,14 @@ const Products = ({ url }: params) => {
                   >
                     {products.name}
                   </h3>
-                  <span className="text-lg ">R$ {products.price}</span>
+                  <div className="flex gap-2">
+                <span className={`${products.off && "line-through text-red-700"}`}>
+                  R${products.price}
+                </span>
+                {products.off > 0 && (
+                  <span>to R${products.price - products.off * products.price}</span>
+                )}
+              </div>
                 </div>
                 <BsFillCartPlusFill
                   onClick={() => addCard(products)}

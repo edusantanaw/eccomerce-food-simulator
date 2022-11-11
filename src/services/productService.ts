@@ -23,7 +23,7 @@ const updateProduct = async (data: any) => {
   })
     .then((response) => response.data)
     .catch((err) => err.response.data);
-  console.log(response);
+
   return response;
 };
 
@@ -36,7 +36,6 @@ const order = async (data: any) => {
     .then((response) => response.data)
     .catch((error) => error.response.data);
 
-  console.log(response);
   return response;
 };
 
@@ -50,7 +49,6 @@ const updateStatus = async (data: any) => {
     .then((response) => response.data)
     .catch((error) => error.response.data);
 
-  console.log(response);
   return response;
 };
 
