@@ -9,10 +9,10 @@ import { lazy, Suspense } from "react";
 import Header from "./pages/partials/Header";
 import Loader from "./components/Loader";
 import Signout from "./pages/login/Signout";
-import { sign } from "./slice/userSlice";
+import Login from "./pages/login/Login";
+
 
 const Home = lazy(() => import("./pages/home/Home"));
-const Login = lazy(() => import("./pages/login/Login"));
 const Settings = lazy(() => import("./pages/settings/Settings"));
 const Deals = lazy(() => import("./pages/deals/Deals"));
 const Order = lazy(() => import("./pages/order/Order"));
@@ -22,6 +22,7 @@ const Menagement = lazy(() => import("./pages/admin/Menagement"));
 const user = JSON.parse(localStorage.getItem("@App:user") || "{}");
 function App() {
   const { auth } = useAuth();
+
   return (
     <div className="w-full min-h-screen bg-black">
       <Router>

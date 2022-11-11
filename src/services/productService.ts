@@ -2,7 +2,7 @@ import { Api } from "../utils/api";
 
 const token = localStorage.getItem("@App:token");
 
-const newProduct = async (data: any) => {
+const newProduct = async (data: object) => {
   const response = await Api.post("/product/register", data, {
     headers: {
       Authorization: `Bearer ${token}`,

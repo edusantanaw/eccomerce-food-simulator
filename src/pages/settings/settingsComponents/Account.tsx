@@ -16,11 +16,12 @@ const Account = () => {
   const dispatch = useDispatch();
   const handleSave = () => {
     const form = new FormData();
-    console.log(firstName);
+  
     form.append("firstName", firstName.current.value);
     form.append("lastName", lastName.current.value);
     form.append("email", email.current.value);
     form.append("phoneNumber", phone.current.value);
+    form.append("image", image)
     const options = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -51,7 +52,7 @@ const Account = () => {
         <div className="flex gap-8 mt-5 items-center">
           <img
             className=" h-14 w-14  object-cover rounded-md"
-            src={user.photo > 0 ? `http://localhost:5000/${
+            src={user.photo ? `http://localhost:5000/${
 
               user.photo.split("\\")[1] + "/" + user.photo.split("\\")[2]
               }`: imgDefault}

@@ -1,7 +1,7 @@
 
 import { Api } from "../utils/api";
 
-const createUser = async (data: any) => {
+const createUser = async (data: object) => {
   const response = await Api.post("/newUser", data)
     .then((reponse) => reponse.data)
     .catch((err) => err.response.data);
@@ -12,7 +12,7 @@ const createUser = async (data: any) => {
 
   return response;
 };
-const signin = async (data: any) => {
+const signin = async (data: object) => {
   const response = await Api.post("/signin", data)
     .then((response) => response.data)
     .catch((err) => err.response.data);

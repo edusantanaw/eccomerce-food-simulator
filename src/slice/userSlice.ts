@@ -25,18 +25,19 @@ const initialState: initial = {
   error: false,
   success: false,
   loading: false,
-  logged: false,
+  logged: user.firstName ? true : false,
 };
 
-export const register = createAsyncThunk<object, object>(
-  "user/register",
-  async (user, thunkAPI) => {
-    const response = await userService.createUser(user);
-    console.log(response);
-    if (response.error) return thunkAPI.rejectWithValue(response.error);
-    return response;
-  }
-);
+export const signout = createAsyncThunk<
+  object,
+  object,
+  { rejectValue: FetchTodosError }
+>("user/signout", async (user, thunkAPI) => {
+  const response = await userService.createUser(user);
+  console.log(response);
+  if (response.error) return thunkAPI.rejectWithValue(response.error);
+  return response;
+});
 
 export const sign = createAsyncThunk<
   object,
@@ -44,6 +45,7 @@ export const sign = createAsyncThunk<
   { rejectValue: FetchTodosError }
 >("user/sign", async (user, thunkAPI) => {
   const response = await userService.signin(user);
+
   if (response.error) return thunkAPI.rejectWithValue(response.error);
   return response;
 });
@@ -72,18 +74,18 @@ export const slice: any = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(register.pending, (state) => {
+      .addCase(signout.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(signout.fulfilled, (state, action) => {
         state.loading = false;
         state.error = false;
         state.success = true;
         state.user = action.payload;
         state.logged = true;
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(signout.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.user = null;
